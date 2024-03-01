@@ -1,0 +1,93 @@
+import java.util.*;
+
+/**
+ * Base file for the ChatterBot exercise.
+ * The bot's replyTo method receives a statement.
+ * If it starts with the constant REQUEST_PREFIX, the bot returns
+ * whatever is after this prefix. Otherwise, it returns one of
+ * a few possible replies as supplied to it via its constructor.
+ * In this case, it may also include the statement after
+ * the selected reply (coin toss).
+ * @author Dan Nirel
+ */
+class ChatterBot {
+	static final String REQUEST_PREFIX = "say ";
+	static final String REQUESTED_PHRASE_PLACEHOLDER = "<phrase>";
+	static final String ILLEGAL_REQUEST_PLACEHOLDER = "<request>";
+
+	Random rand = new Random();
+	String[] repliesToIllegalRequest;
+
+	String[] repliesTollegalRequests;
+
+	String name;
+
+	ChatterBot(String name, String[] repliesToIllegalRequest, String[] repliesTollegalRequests)
+	{
+		this.name = name;
+
+		this.repliesToIllegalRequest = new String[repliesToIllegalRequest.length];
+		for(int i = 0 ; i < repliesToIllegalRequest.length ; i = i+1)
+		{
+			this.repliesToIllegalRequest[i] = repliesToIllegalRequest[i];
+		}
+
+		this.repliesTollegalRequests = new String[repliesTollegalRequests.length];
+		for(int i = 0 ; i < repliesTollegalRequests.length ; i = i+1)
+		{
+			this.repliesTollegalRequests[i] = repliesTollegalRequests[i];
+		}
+
+	}
+
+	String getName()
+	{
+		return this.name;
+	}
+
+	String replyTo(String statement)
+	{
+		if(statement.startsWith(REQUEST_PREFIX))
+		{
+			return respondTollegalRequests(statement);
+		}
+		return respondToIllegalRequest(statement);
+	}
+
+	/**
+	 * This method generate a response for illegal request
+	 * @param statement - input statement
+	 * @return the response
+	 */
+	String respondToIllegalRequest(String statement)
+	{
+		return  replacePlaceholderInARandomPattern
+				(repliesToIllegalRequest,ILLEGAL_REQUEST_PLACEHOLDER, statement);
+	}
+
+	/**
+	 * This method generate a response for legal request
+	 * @param statement - input statement
+	 * @return the response
+	 */
+	String respondTollegalRequests(String statement)
+	{
+		String phrase = statement.replaceFirst(REQUEST_PREFIX, "");
+		return  replacePlaceholderInARandomPattern
+				(repliesTollegalRequests,REQUESTED_PHRASE_PLACEHOLDER, phrase);
+	}
+
+	/**
+	 * This method select random response and replace the placeholder string with given text
+	 * @param responsesList - list of possible response
+	 * @param placeHolder - the place-holder text
+	 * @param responsText - the texted to replace the place-holder text
+	 * @return the response
+	 */
+	String replacePlaceholderInARandomPattern(String[] responsesList, String placeHolder, String responsText)
+	{
+		int randomIndex = rand.nextInt(responsesList.length);
+		String randomPattern =  responsesList[randomIndex];
+		return randomPattern.replaceAll(placeHolder, responsText);
+	}
+}

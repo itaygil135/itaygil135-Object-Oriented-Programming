@@ -1,0 +1,27 @@
+itaygil35
+316385962
+itaygil35
+316385962
+
+BrightnessImgCharMatcher:
+
+1.I used a hashMap in BrightnessImgCharMatcher, so that each char can be mapped to a brightness.
+I perdered to use chars as the keys instead of image because image can be change at another call 
+not just when thre is a larger or difreent char in set chars but also in diferrent parametr of 
+charsInRow therefore I used Map of cahrs and float and each calcoulation I sent the linerstretch 
+function and the imageBritness function as arguments.
+by that we calculate regrards to the images again but it is is better because the chances  is low
+and therfore we save ourself from removing the images every call when the numCharsInRow is different
+If we need the brightness of a char which was not yet calculated and added to the hashMap,
+then we calculate by using the linaerstretch function again and add to map.
+Also since it takes o(1) on average to check if a char was mapped yet or not, this is very efficient.
+
+2.I used a hashSet for characters in Shell, to insure there would not be duplicates.
+
+3. I made an Iterator in specific for both type: pixels and images
+   and that for the ability to move by the roles and by the fit size of each type 
+if it is 1 by one or some size by some size.
+for implement it I created a new class which impements the interface image and a new class which
+implements the inteface of Iterable and by sending the class of an image whith the coreespending size
+we will be able to run on it easily 
+
